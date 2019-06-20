@@ -10,6 +10,7 @@ import (
 // Logger type
 type Logger struct {
 	stackdriverEnabled bool
+	stdoutEnabled      bool
 	client             *logging.Client
 	d                  *log.Logger
 	i                  *log.Logger
@@ -28,14 +29,24 @@ type Options struct {
 	// characters: [A-Za-z0-9]; and punctuation characters: forward-slash,
 	// underscore, hyphen, and period.
 	LogID string
+
+	// Should logs be written to stdout? Defaults to true.
+	Stdout *bool
 }
 
 // NewLogger constructs a new logger
 // It's recommended to make this a global instance called `log`.
 func NewLogger(ctx context.Context, opts Options) (*Logger, error) {
+	stdout := true
+	if opts.Stdout != nil {
+		stdout = *opts.Stdout
+	}
+
 	projectID := opts.ProjectID
 	if len(projectID) == 0 {
-		logger := &Logger{stackdriverEnabled: false}
+		logger := &Logger{
+			stdoutEnabled:      stdout,
+			stackdriverEnabled: false}
 		return logger, nil
 	}
 
@@ -53,13 +64,13 @@ func NewLogger(ctx context.Context, opts Options) (*Logger, error) {
 	e := client.Logger(logID).StandardLogger(logging.Error)
 
 	logger := &Logger{
-		stackdriverEnabled: true,
 		client:             client,
+		stackdriverEnabled: true,
+		stdoutEnabled:      stdout,
 		d:                  d,
 		i:                  i,
 		w:                  w,
-		e:                  e,
-	}
+		e:                  e}
 
 	return logger, nil
 }
@@ -69,7 +80,9 @@ func (logger *Logger) Debug(v ...interface{}) {
 	if logger.stackdriverEnabled {
 		logger.d.Println(v...)
 	}
-	log.Println(v...)
+	if logger.stdoutEnabled {
+		log.Println(v...)
+	}
 }
 
 // Debugf prints debug messages to the logger
@@ -77,7 +90,9 @@ func (logger *Logger) Debugf(format string, v ...interface{}) {
 	if logger.stackdriverEnabled {
 		logger.d.Printf(format, v...)
 	}
-	log.Printf(format, v...)
+	if logger.stdoutEnabled {
+		log.Printf(format, v...)
+	}
 }
 
 // Error prints error messages to the logger
@@ -85,7 +100,9 @@ func (logger *Logger) Error(v ...interface{}) {
 	if logger.stackdriverEnabled {
 		logger.e.Println(v...)
 	}
-	log.Println(v...)
+	if logger.stdoutEnabled {
+		log.Println(v...)
+	}
 }
 
 // Errorf prints error messages to the logger
@@ -93,7 +110,9 @@ func (logger *Logger) Errorf(format string, v ...interface{}) {
 	if logger.stackdriverEnabled {
 		logger.e.Printf(format, v...)
 	}
-	log.Printf(format, v...)
+	if logger.stdoutEnabled {
+		log.Printf(format, v...)
+	}
 }
 
 // Fatal prints error message followed by a call to os.Exit(1).
@@ -101,7 +120,9 @@ func (logger *Logger) Fatal(v ...interface{}) {
 	if logger.stackdriverEnabled {
 		logger.e.Fatal(v...)
 	}
-	log.Fatal(v...)
+	if logger.stdoutEnabled {
+		log.Fatal(v...)
+	}
 }
 
 // Fatalf prints error message followed by a call to os.Exit(1).
@@ -109,7 +130,9 @@ func (logger *Logger) Fatalf(format string, v ...interface{}) {
 	if logger.stackdriverEnabled {
 		logger.e.Fatalf(format, v...)
 	}
-	log.Fatalf(format, v...)
+	if logger.stdoutEnabled {
+		log.Fatalf(format, v...)
+	}
 }
 
 // Info prints info messages to the logger
@@ -117,7 +140,9 @@ func (logger *Logger) Info(v ...interface{}) {
 	if logger.stackdriverEnabled {
 		logger.i.Println(v...)
 	}
-	log.Println(v...)
+	if logger.stdoutEnabled {
+		log.Println(v...)
+	}
 }
 
 // Infof prints info messages to the logger
@@ -125,7 +150,9 @@ func (logger *Logger) Infof(format string, v ...interface{}) {
 	if logger.stackdriverEnabled {
 		logger.i.Printf(format, v...)
 	}
-	log.Printf(format, v...)
+	if logger.stdoutEnabled {
+		log.Printf(format, v...)
+	}
 }
 
 // Warning prints warning messages to the logger
@@ -133,7 +160,9 @@ func (logger *Logger) Warning(v ...interface{}) {
 	if logger.stackdriverEnabled {
 		logger.w.Println(v...)
 	}
-	log.Println(v...)
+	if logger.stdoutEnabled {
+		log.Println(v...)
+	}
 }
 
 // Warningf prints warning messages to the logger
@@ -141,10 +170,14 @@ func (logger *Logger) Warningf(format string, v ...interface{}) {
 	if logger.stackdriverEnabled {
 		logger.w.Printf(format, v...)
 	}
-	log.Printf(format, v...)
+	if logger.stdoutEnabled {
+		log.Printf(format, v...)
+	}
 }
 
 // Close waits for all opened loggers to be flushed and closes the client.
 func (logger *Logger) Close() {
-	logger.client.Close()
+	if logger.client != nil {
+		logger.client.Close()
+	}
 }
