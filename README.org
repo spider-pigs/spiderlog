@@ -1,0 +1,42 @@
+* spiderlog
+
+[[https://travis-ci.org/spider-pigs/spiderlog][https://travis-ci.org/spider-pigs/spiderlog.svg?branch=master]] [[https://godoc.org/github.com/spider-pigs/spiderlog][https://godoc.org/github.com/spider-pigs/spiderlog?status.svg]]
+
+spiderlog is a simple Google StackDriver logging client.
+
+*** Install
+
+#+BEGIN_EXAMPLE
+import "github.com/spider-pigs/spiderlog"
+#+END_EXAMPLE
+
+** Usage
+
+There are four logging levels supported:
+- Debug
+- Info
+- Warning
+- Error
+
+#+BEGIN_EXAMPLE
+// Create logger
+opts := Options{
+    ProjectID: "google-project-id", // The google project id
+    LogID: "log-id", // The log id
+    Stdout: false, // Log to stdout?
+}
+
+log, err := NewLogger(context.Background(), opts)
+if err != nil {
+    // Handle error...
+}
+
+// Write an info log
+log.Info("Hello World!")
+
+// Or log with formatting
+log.Infof("Hello %s!", "World")
+
+// Close when done
+log.Close()
+#+END_EXAMPLE
