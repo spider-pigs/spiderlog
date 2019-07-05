@@ -1,6 +1,6 @@
 * spiderlog
 
-[[https://travis-ci.org/spider-pigs/spiderlog][https://travis-ci.org/spider-pigs/spiderlog.svg?branch=master]] [[https://godoc.org/github.com/spider-pigs/spiderlog][https://godoc.org/github.com/spider-pigs/spiderlog?status.svg]]
+[[https://travis-ci.org/spider-pigs/spiderlog][https://travis-ci.org/spider-pigs/spiderlog.svg?branch=master]] [[https://www.codacy.com/app/spider-pigs/spiderlog?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=spider-pigs/spiderlog&amp;utm_campaign=Badge_Grade][https://api.codacy.com/project/badge/Grade/ca5c6fceda1547ba92ba4c4673db461f?.svg]] [[https://godoc.org/github.com/spider-pigs/spiderlog][https://godoc.org/github.com/spider-pigs/spiderlog?status.svg]]
 
 spiderlog is a simple Google StackDriver logging client.
 
