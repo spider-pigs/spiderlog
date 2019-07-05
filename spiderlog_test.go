@@ -1,13 +1,15 @@
-package spiderlog
+package spiderlog_test
 
 import (
 	"context"
 	"testing"
+
+	"github.com/spider-pigs/spiderlog"
 )
 
 func TestEmptyOpts(t *testing.T) {
-	opts := Options{}
-	logger, err := NewLogger(context.Background(), opts)
+	opts := spiderlog.Options{}
+	logger, err := spiderlog.NewLogger(context.Background(), opts)
 	if err != nil {
 		t.Error("could not create logger", err)
 	}
@@ -20,9 +22,9 @@ func TestEmptyOpts(t *testing.T) {
 
 func TestDisableStdout(t *testing.T) {
 	stdout := false
-	opts := Options{
+	opts := spiderlog.Options{
 		Stdout: &stdout}
-	logger, err := NewLogger(context.Background(), opts)
+	logger, err := spiderlog.NewLogger(context.Background(), opts)
 	if err != nil {
 		t.Error("could not create logger", err)
 	}
