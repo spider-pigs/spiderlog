@@ -71,84 +71,84 @@ func New(options ...Option) *Logger {
 
 // Debug prints debug messages to the logger
 func (logger *Logger) Debug(v ...interface{}) {
-	println(logger.cfg.DebugLogger, v)
-	logger.println(v)
+	println(logger.cfg.DebugLogger, v...)
+	logger.println(v...)
 }
 
 // Debugf prints debug messages to the logger
 func (logger *Logger) Debugf(format string, v ...interface{}) {
-	printf(logger.cfg.DebugLogger, format, v)
-	logger.printf(format, v)
+	printf(logger.cfg.DebugLogger, format, v...)
+	logger.printf(format, v...)
 }
 
 // Error prints error messages to the logger
 func (logger *Logger) Error(v ...interface{}) {
-	println(logger.cfg.ErrorLogger, v)
-	logger.println(v)
+	println(logger.cfg.ErrorLogger, v...)
+	logger.println(v...)
 }
 
 // Errorf prints error messages to the logger
 func (logger *Logger) Errorf(format string, v ...interface{}) {
-	printf(logger.cfg.ErrorLogger, format, v)
-	logger.printf(format, v)
+	printf(logger.cfg.ErrorLogger, format, v...)
+	logger.printf(format, v...)
 }
 
 // Fatal prints error message followed by a call to os.Exit(1).
 func (logger *Logger) Fatal(v ...interface{}) {
-	print(logger.cfg.ErrorLogger, v)
+	println(logger.cfg.ErrorLogger, v...)
 	log.Fatal(v...)
 }
 
 // Fatalf prints error message followed by a call to os.Exit(1).
 func (logger *Logger) Fatalf(format string, v ...interface{}) {
-	printf(logger.cfg.ErrorLogger, format, v)
+	printf(logger.cfg.ErrorLogger, format, v...)
 	log.Fatalf(format, v...)
 }
 
 // Info prints info messages to the logger
 func (logger *Logger) Info(v ...interface{}) {
-	println(logger.cfg.InfoLogger, v)
-	logger.println(v)
+	println(logger.cfg.InfoLogger, v...)
+	logger.println(v...)
 }
 
 // Infof prints info messages to the logger
 func (logger *Logger) Infof(format string, v ...interface{}) {
-	printf(logger.cfg.InfoLogger, format, v)
-	logger.printf(format, v)
+	printf(logger.cfg.InfoLogger, format, v...)
+	logger.printf(format, v...)
 }
 
 // Warning prints warning messages to the logger
 func (logger *Logger) Warning(v ...interface{}) {
-	println(logger.cfg.WarningLogger, v)
-	logger.println(v)
+	println(logger.cfg.WarningLogger, v...)
+	logger.println(v...)
 }
 
 // Warningf prints warning messages to the logger
 func (logger *Logger) Warningf(format string, v ...interface{}) {
-	printf(logger.cfg.WarningLogger, format, v)
-	logger.printf(format, v)
+	printf(logger.cfg.WarningLogger, format, v...)
+	logger.printf(format, v...)
 }
 
-func (logger *Logger) printf(format string, v []interface{}) {
+func (logger *Logger) printf(format string, v ...interface{}) {
 	if logger.cfg.StdoutEnabled {
-		log.Printf(format, v)
+		log.Printf(format, v...)
 	}
 }
 
-func (logger *Logger) println(v []interface{}) {
+func (logger *Logger) println(v ...interface{}) {
 	if logger.cfg.StdoutEnabled {
-		log.Println(v)
+		log.Println(v...)
 	}
 }
 
-func printf(logger *log.Logger, format string, v []interface{}) {
+func printf(logger *log.Logger, format string, v ...interface{}) {
 	if logger != nil {
-		logger.Printf(format, v)
+		logger.Printf(format, v...)
 	}
 }
 
-func println(logger *log.Logger, v []interface{}) {
+func println(logger *log.Logger, v ...interface{}) {
 	if logger != nil {
-		logger.Println(v)
+		logger.Println(v...)
 	}
 }
