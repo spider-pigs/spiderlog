@@ -69,6 +69,26 @@ func New(options ...Option) *Logger {
 	return &Logger{cfg: cfg}
 }
 
+// DebugLogger returns the logger used for debug
+func (logger *Logger) DebugLogger() *log.Logger {
+	return logger.cfg.DebugLogger
+}
+
+// InfoLogger returns the logger used for info
+func (logger *Logger) InfoLogger() *log.Logger {
+	return logger.cfg.InfoLogger
+}
+
+// WarningLogger returns the logger used for warnings
+func (logger *Logger) WarningLogger() *log.Logger {
+	return logger.cfg.WarningLogger
+}
+
+// ErrorLogger returns the logger used for errors
+func (logger *Logger) ErrorLogger() *log.Logger {
+	return logger.cfg.ErrorLogger
+}
+
 // Debug prints debug messages to the logger
 func (logger *Logger) Debug(v ...interface{}) {
 	println(logger.cfg.DebugLogger, v...)
