@@ -1,5 +1,5 @@
 # spiderlog
-[![Build Status](https://travis-ci.org/spider-pigs/spiderlog.svg?branch=master)](https://travis-ci.org/spider-pigs/spiderlog) [![Go Report Card](https://goreportcard.com/badge/github.com/spider-pigs/spiderlog)](https://goreportcard.com/report/github.com/spider-pigs/spiderlog) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ca5c6fceda1547ba92ba4c4673db461f)](https://www.codacy.com/app/spider-pigs/spiderlog?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=spider-pigs/spiderlog&amp;utm_campaign=Badge_Grade) [![GoDoc](https://godoc.org/github.com/spider-pigs/spiderlog?status.svg)](https://godoc.org/github.com/spider-pigs/spiderlog)
+[![Build Status](https://travis-ci.org/spider-pigs/spiderlog.svg?branch=master)](https://travis-ci.org/spider-pigs/spiderlog) [![Go Report Card](https://goreportcard.com/badge/github.com/spider-pigs/spiderlog)](https://goreportcard.com/report/github.com/spider-pigs/spiderlog) [![GoDoc](https://godoc.org/github.com/spider-pigs/spiderlog?status.svg)](https://godoc.org/github.com/spider-pigs/spiderlog)
 
 spiderlog is a simple logging client.
 
